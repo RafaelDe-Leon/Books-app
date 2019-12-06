@@ -16,5 +16,28 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  loginUser: function(user) {
+    return axios.post("/api/login/", user, {
+      headers: { xhrFields: {
+        withCredentials: true
+      }
+    }})
+  },
+  signup: function(user) {
+    return axios.post("/api/login/signup", user, {
+      headers: { xhrFields: {
+        withCredentials: true
+      }
+    }})
+  },
+  authUser: function() {
+    console.log('auth');
+    return axios.post("/api/login/authenticate/", {
+      headers: { xhrFields: {
+        withCredentials: true
+      }
+    }})
   }
+  
 };
