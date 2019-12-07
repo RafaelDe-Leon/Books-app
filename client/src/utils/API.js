@@ -1,42 +1,38 @@
 import axios from "axios";
 
+const xhrHeader = {
+  headers: {
+    xhrFields: {
+      withCredentials: true
+    }
+  }
+};
+
 export default {
   // Gets all books
-  getBooks: function() {
+  getBooks: function () {
     return axios.get("/api/books");
   },
   // Gets the book with the given id
-  getBook: function(id) {
+  getBook: function (id) {
     return axios.get("/api/books/" + id);
   },
   // Deletes the book with the given id
-  deleteBook: function(id) {
+  deleteBook: function (id) {
     return axios.delete("/api/books/" + id);
   },
   // Saves a book to the database
-  saveBook: function(bookData) {
+  saveBook: function (bookData) {
     return axios.post("/api/books", bookData);
   },
-  loginUser: function(user) {
-    return axios.post("/api/user/", user, {
-      headers: { xhrFields: {
-        withCredentials: true
-      }
-    }})
+  loginUser: function (user) {
+    return axios.post("/api/user/", user, xhrHeader)
   },
-  signup: function(user) {
-    return axios.post("/api/user/signup", user, {
-      headers: { xhrFields: {
-        withCredentials: true
-      }
-    }})
+  signup: function (user) {
+    return axios.post("/api/user/signup", user, xhrHeader)
   },
-  authenticateUser: function() {
-    return axios.post("/api/user/authenticate/", {
-      headers: { xhrFields: {
-        withCredentials: true
-      }
-    }})
+  authenticateUser: function () {
+    return axios.post("/api/user/authenticate/", xhrHeader)
   }
-  
+
 };

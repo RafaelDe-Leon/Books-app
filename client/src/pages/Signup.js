@@ -35,7 +35,7 @@ class Signup extends Component {
         passwordConf: this.state.passwordConf,
 
       })
-        .then(res => console.log("logged in"))
+        .then(res => this.setState({authenticated: res.status === 200 ? true: false}))
         .catch(err => console.log(err));
     }
   };

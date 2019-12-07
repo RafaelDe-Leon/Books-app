@@ -11,7 +11,7 @@ var session = require('express-session')
 app.use(morgan("dev"));
 
 //use sessions for tracking logins
-app.use(session({secret: 'keyboard cat',cookie:{}}));
+app.use(session({secret: 'keyboard cat', cookie:{}}));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

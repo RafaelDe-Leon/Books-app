@@ -18,7 +18,10 @@ module.exports = {
       db.User
         .create(userData)
         .then(dbModel => {
-          res.cookie.userId = dbModel._id;
+          // setting the client cookie
+          res.cookie("userId", dbModel._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
+          // set the session
+          req.session.userId = dbModel._id;
           return res.json(dbModel)
         })
         .catch(err => res.status(422).json(err));
@@ -36,10 +39,9 @@ module.exports = {
           err.status = 401;
           return next(err);
         } else {
-          console.log(user._id);
+          console.log(`login: `, user._id);
           res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
           req.session.userId = user._id;
-          console.log("login done");
           return next();
           return res.redirect('/api/profile');
         }
@@ -50,6 +52,7 @@ module.exports = {
       return next(err);
     }
   },
+  
   authenticate: function( req, res, next){
     console.log("inside auth");
     console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
@@ -69,6 +72,4 @@ module.exports = {
       }
     });
   }
-
-  
 };
