@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
 import API from "../utils/API";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    authenticated: false
   };
 
   componentDidMount() {
@@ -29,7 +30,7 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(res => console.log("logged in"))
+        .then(res => this.setState({authenticated: res.data}))
         .catch(err => console.log(err));
     }
   };
@@ -65,6 +66,9 @@ class Login extends Component {
           </Col>
           
         </Row>
+
+        {/* Redirect on authentication */}
+        {this.state.authenticated ? <Redirect to="/books" /> : <div></div>}
       </Container>
     );
   }

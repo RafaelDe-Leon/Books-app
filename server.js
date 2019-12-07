@@ -11,14 +11,12 @@ var session = require('express-session')
 app.use(morgan("dev"));
 
 //use sessions for tracking logins
-app.use(session({
-  secret: 'keyboard cat',
-  cookie: {}
-}));
+app.use(session({secret: 'keyboard cat',cookie:{}}));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

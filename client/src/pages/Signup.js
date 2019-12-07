@@ -10,7 +10,8 @@ class Signup extends Component {
     email: "",
     username: "",
     password: "",
-    passwordConf: ""
+    passwordConf: "",
+    authenticated: false
   };
 
   componentDidMount() {
@@ -83,6 +84,9 @@ class Signup extends Component {
           </Col>
           
         </Row>
+        {/* redirect on authenticated */}
+        {this.state.authenticated ? <Redirect to="/books" /> : <div></div>}
+
       </Container>
     );
   }

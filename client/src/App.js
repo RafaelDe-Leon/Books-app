@@ -10,6 +10,9 @@ import {getCookie, authUser} from "./utils/handleSessions";
 
 
 class App extends React.Component {
+  // check cookie
+  // getCookie();
+
   state = {
     authenticated: false,
     loading: true
@@ -31,8 +34,6 @@ class App extends React.Component {
           : <Redirect to='/' />
     )} />
   )
-  // getCookie();
-
 
   render(){
     return (

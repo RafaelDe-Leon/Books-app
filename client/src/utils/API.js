@@ -18,22 +18,22 @@ export default {
     return axios.post("/api/books", bookData);
   },
   loginUser: function(user) {
-    return axios.post("/api/login/", user, {
+    return axios.post("/api/user/", user, {
       headers: { xhrFields: {
         withCredentials: true
       }
     }})
   },
   signup: function(user) {
-    return axios.post("/api/login/signup", user, {
+    return axios.post("/api/user/signup", user, {
       headers: { xhrFields: {
         withCredentials: true
       }
     }})
   },
-  authUser: function() {
+  authenticateUser: function() {
     console.log('auth');
-    return axios.post("/api/login/authenticate/", {
+    return axios.post("/api/user/authenticate/", {
       headers: { xhrFields: {
         withCredentials: true
       }
