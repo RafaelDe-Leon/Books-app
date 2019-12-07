@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import Books from "./pages/Books";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Detail from "./pages/Detail";
+// import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import {getCookie, authenticateUser} from "./utils/handleSessions";
+import {/* getCookie, */ authenticateUser} from "./utils/handleSessions";
 
 
 class App extends React.Component {

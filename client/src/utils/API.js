@@ -32,7 +32,6 @@ export default {
     }})
   },
   authenticateUser: function() {
-    console.log('auth');
     return axios.post("/api/user/authenticate/", {
       headers: { xhrFields: {
         withCredentials: true
