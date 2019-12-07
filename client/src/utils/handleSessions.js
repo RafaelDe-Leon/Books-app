@@ -5,10 +5,10 @@ export const getCookie = () => {
   const cookie = Cookies.get('userId')
   console.log(cookie)}
 
-export const authUser = () => {
+export const authenticateUser = () => {
     const cookie = Cookies.get('userId');
     console.log(cookie);
-    return  API.authUser();
+    return  API.authenticateUser();
   }
   
 export const logOut = () => {

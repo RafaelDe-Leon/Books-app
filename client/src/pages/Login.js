@@ -30,7 +30,7 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(res => this.setState({authenticated: res.data}))
+        .then(res => {console.log(res);this.setState({authenticated: res.status === 200 ? true: false})})
         .catch(err => console.log(err));
     }
   };

@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import {getCookie, authUser} from "./utils/handleSessions";
+import {getCookie, authenticateUser} from "./utils/handleSessions";
 
 
 class App extends React.Component {
@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   componentWillMount(){
-    authUser()
+    authenticateUser()
       .then(auth => {
         console.log(auth);
         this.setState({authenticated: auth.data, loading:false})})
