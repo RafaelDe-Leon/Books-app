@@ -13,6 +13,7 @@ app.use(morgan("dev"));
 //use sessions for tracking logins
 app.use(session({secret: 'keyboard cat', cookie:{}}));
 
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 // Add routes, both API and view
 app.use(routes);
 

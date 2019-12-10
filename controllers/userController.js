@@ -42,7 +42,8 @@ module.exports = {
           console.log(`login: `, user._id);
           res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
           req.session.userId = user._id;
-          return next();
+          console.log('redirect');
+          return res.redirect('/books');
           return res.redirect('/api/profile');
         }
       });
@@ -52,7 +53,7 @@ module.exports = {
       return next(err);
     }
   },
-  
+
   authenticate: function( req, res, next){
     console.log("inside auth");
     console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
@@ -62,10 +63,10 @@ module.exports = {
         return next(error);
       } else {
         if (user === null) {
-          res.cookie.maxAge = 0;
+          res.cookie('userId','').status(401);
           return res.json('Not authorized! Go back!');
         } else {
-          res.cookie.maxAge = 1000 * 60 * 60; 
+          res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
           return res.json(true);
           return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }

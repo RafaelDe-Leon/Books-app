@@ -7,11 +7,10 @@ import { Input, FormBtn } from "../components/Form";
 
 class Login extends Component {
   state = {
-    email: "",
-    password: "",
-    authenticated: false
-  };
-
+      email: "",
+      password: ""
+    };
+    
   componentDidMount() {
   }
 
@@ -30,7 +29,12 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(res => this.setState({authenticated: res.status === 200 ? true: false}))
+        .then(res => {
+          if(res.status === 200 || this.props.authenticated){
+            this.props.authenticate();
+            return <Redirect to="/books" />
+          }
+        })
         .catch(err => console.log(err));
     }
   };
@@ -68,7 +72,7 @@ class Login extends Component {
         </Row>
 
         {/* Redirect on authentication */}
-        {this.state.authenticated ? <Redirect to="/books" /> : <div></div>}
+        {this.props.authenticated ? <Redirect to='/books'/>: <div></div>}
       </Container>
     );
   }
