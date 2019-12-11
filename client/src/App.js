@@ -41,8 +41,8 @@ class App extends React.Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/"  render={(props) => <Login {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
-          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/" render={(props) => <Login {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
+          <Route exact path="/signup"  render={(props) => <Signup {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
           <this.PrivateRoute exact path="/books" component={Books} />
           <Route component={NoMatch} />
         </Switch>

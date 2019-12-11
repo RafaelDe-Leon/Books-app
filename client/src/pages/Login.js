@@ -13,7 +13,6 @@ class Login extends Component {
     
   componentDidMount() {
   }
-
   
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -30,7 +29,7 @@ class Login extends Component {
         password: this.state.password
       })
         .then(res => {
-          if(res.status === 200 || this.props.authenticated){
+          if(res.status === 200 ){
             this.props.authenticate();
             return <Redirect to="/books" />
           }

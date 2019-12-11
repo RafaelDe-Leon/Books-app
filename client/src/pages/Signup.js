@@ -10,8 +10,7 @@ class Signup extends Component {
     email: "",
     username: "",
     password: "",
-    passwordConf: "",
-    authenticated: false
+    passwordConf: ""
   };
 
   componentDidMount() {
@@ -35,7 +34,12 @@ class Signup extends Component {
         passwordConf: this.state.passwordConf,
 
       })
-        .then(res => this.setState({authenticated: res.status === 200 ? true: false}))
+        .then(res => {
+          if(res.status === 200 ){
+            this.props.authenticate();
+            return <Redirect to="/books" />
+          }
+        })
         .catch(err => console.log(err));
     }
   };
@@ -85,7 +89,8 @@ class Signup extends Component {
           
         </Row>
         {/* redirect on authenticated */}
-        {this.state.authenticated ? <Redirect to="/books" /> : <div></div>}
+        {this.props.authenticated ? <Redirect to='/books'/>: <div></div>}
+
 
       </Container>
     );
