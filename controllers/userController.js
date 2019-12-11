@@ -54,7 +54,6 @@ module.exports = {
   },
 
   authenticate: function( req, res, next){
-    console.log("inside auth");
     console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
     db.User.findById(req.session.userId)
     .exec(function (error, user) {
