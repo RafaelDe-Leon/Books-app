@@ -44,7 +44,6 @@ module.exports = {
           req.session.userId = user._id;
           console.log('redirect');
           return res.redirect('/books');
-          return res.redirect('/api/profile');
         }
       });
     } else {
