@@ -63,7 +63,7 @@ class Login extends Component {
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Log in
               </FormBtn>
             </form>
           </Col>
