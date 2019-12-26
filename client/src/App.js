@@ -40,12 +40,9 @@ class App extends React.Component {
 
   render() {
     const RouterComponent = this.state.ssr ? StaticRouter : Router;
-
     return (
       <RouterComponent>
-
         <div>
-
           <Nav />
           <Switch>
             <Route
