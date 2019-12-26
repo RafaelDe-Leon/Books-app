@@ -12,7 +12,7 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
-    
+
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/register": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.7",
     "cookie-parser": "^1.4.4",
