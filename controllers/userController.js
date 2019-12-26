@@ -1,4 +1,5 @@
 const db = require("../models");
+var session = require('express-session')
 
 // Defining methods for the booksController
 module.exports = {
@@ -55,18 +56,23 @@ module.exports = {
 
   authenticate: function( req, res, next){
     console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
+    // req.session.cookie = {}
     db.User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
         return next(error);
       } else {
         if (user === null) {
-          res.cookie('userId','').status(401);
-          return res.json('Not authorized! Go back!');
+          req.session.destroy(function(err){
+            if (err) throw err;
+            res.clearCookie("userId");
+            res.clearCookie("connect.sid");
+            return res.status(401).json('Not authorized! Go back!');
+
+          });
         } else {
           res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
-          return res.json(true);
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          return res.status(200).json(user);
         }
       }
     });

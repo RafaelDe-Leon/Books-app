@@ -7,7 +7,15 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import {/* getCookie, */ authenticateUser} from "./utils/handleSessions";
 
-
+const PrivateRoute = ({ component: Component, state: state, ...rest  }) => (
+  <Route {...rest} render={  (props) => (
+    state.authenticated === true 
+      ? <Component {...props} />
+      : state.loading === true
+        ?<div></div>
+        : <Redirect to='/' />
+  )} />
+)
 class App extends React.Component {
   // check cookie
   // getCookie();
@@ -18,22 +26,14 @@ class App extends React.Component {
   }
 
   authenticate = () => authenticateUser()
-    .then(auth => this.setState({authenticated: auth.data, loading:false}))
+    .then(auth => this.setState({authenticated: auth.status == 200 ? true : false , loading:false}))
     .catch(err => console.log(err))
 
   componentWillMount(){
     this.authenticate();
   }
   
-  PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={  (props) => (
-      this.state.authenticated === true 
-        ? <Component {...props} />
-        : this.state.loading === true
-          ?<div></div>
-          : <Redirect to='/' />
-    )} />
-  )
+
 
   render(){
     return (
@@ -43,7 +43,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={(props) => <Login {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
           <Route exact path="/signup"  render={(props) => <Signup {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
-          <this.PrivateRoute exact path="/books" component={Books} />
+          <PrivateRoute exact path="/books" state={this.state}component={Books} />
           <Route component={NoMatch} />
         </Switch>
       </div>
