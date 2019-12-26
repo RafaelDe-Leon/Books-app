@@ -10,7 +10,10 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 var session = require('express-session')
-
+var MemoryStore = require('memorystore')(session)
+var store =  new MemoryStore({
+  checkPeriod: 86400000 // prune expired entries every 24h
+})
 // ssr
 const React = require('react')
 const ReactDOMServer = require('react-dom/server')
@@ -21,7 +24,11 @@ const ReactDOMServer = require('react-dom/server')
 app.use(morgan("dev"));
 
 //use sessions for tracking logins
-app.use(session({ secret: 'keyboard cat', cookie: {httpOnly: false, maxAge: 1000 * 60 * 60 * 24} }));
+app.use(session({ 
+  secret: 'keyboard cat',
+  store: store,
+  cookie: {httpOnly: false, maxAge: 1000 * 60 * 60 * 24} 
+}));
 
 
 // Define middleware here

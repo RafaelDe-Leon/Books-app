@@ -1,5 +1,4 @@
 const db = require("../models");
-var session = require('express-session')
 
 // Defining methods for the booksController
 module.exports = {
@@ -19,10 +18,8 @@ module.exports = {
       db.User
         .create(userData)
         .then(dbModel => {
-          // setting the client cookie
-          res.cookie("userId", dbModel._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
-          // set the session
-          req.session.userId = dbModel._id;
+          // set the session userid
+          req.session.user = dbModel;
           return res.json(dbModel)
         })
         .catch(err => res.status(422).json(err));
@@ -41,8 +38,8 @@ module.exports = {
           return next(err);
         } else {
           console.log(`login: `, user._id);
-          res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
-          req.session.userId = user._id;
+          // req.session.userId = user._id;
+          req.session.user = user;
           console.log('redirect');
           return res.redirect('/books');
         }
@@ -56,25 +53,12 @@ module.exports = {
 
   authenticate: function( req, res, next){
     console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
-    // req.session.cookie = {}
-    db.User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          req.session.destroy(function(err){
-            if (err) throw err;
-            res.clearCookie("userId");
-            res.clearCookie("connect.sid");
-            return res.status(401).json('Not authorized! Go back!');
-
-          });
-        } else {
-          res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
-          return res.status(200).json(user);
-        }
-      }
-    });
+    console.log(req.session.user);
+    // check only on user - no db call
+    if(req.session.user){
+      return res.status(200).json(req.session.user);
+    }else{
+        return res.status(401).json('Not authorized! Go back!');
+    }
   }
 };

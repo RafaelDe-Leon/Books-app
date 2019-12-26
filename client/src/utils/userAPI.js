@@ -1,5 +1,13 @@
 import axios from "axios";
 
+const xhrHeader = {
+  headers: {
+    xhrFields: {
+      withCredentials: true
+    }
+  }
+};
+
 export default {
   // Gets all books
   getBooks: function () {
@@ -16,6 +24,15 @@ export default {
   // Saves a book to the database
   saveBook: function (bookData) {
     return axios.post("/api/books", bookData);
+  },
+  loginUser: function (user) {
+    return axios.post("/api/user/", user, xhrHeader)
+  },
+  signup: function (user) {
+    return axios.post("/api/user/signup", user, xhrHeader)
+  },
+  authenticateUser: function () {
+    return axios.post("/api/user/authenticate/", xhrHeader)
   }
 
 };

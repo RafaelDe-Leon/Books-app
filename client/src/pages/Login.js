@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import API from "../utils/API";
+import userAPI from "../utils/userAPI";
 import {  Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
@@ -24,7 +24,7 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
-      API.loginUser({
+      userAPI.loginUser({
         email: this.state.email,
         password: this.state.password
       })

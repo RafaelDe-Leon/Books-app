@@ -34,6 +34,7 @@
     "if-env": "^1.0.4",
     "ignore-styles": "^5.0.1",
     "js-cookie": "^2.2.1",
+    "memorystore": "^1.6.1",
     "mongoose": "^5.3.16",
     "morgan": "^1.9.1",
     "react": "^16.12.0",

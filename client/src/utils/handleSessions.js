@@ -1,16 +1,16 @@
 import Cookies from 'js-cookie';
-import API from './API';
-
-export const getCookie = () => {
-  const cookie = Cookies.get('userId')
-  console.log(cookie)}
+import userAPI from './userAPI';
 
 export const authenticateUser = () => {
     const cookie = Cookies.get('userId');
     console.log(cookie);
-    return  API.authenticateUser();
+    return  userAPI.authenticateUser();
   }
   
 export const logOut = () => {
-  Cookies.remove()
+
+  // TO-DO: call logout route, on response, remove the cookie on the front end:
+  Object.keys(Cookies.get()).forEach(element => {
+    Cookies.remove(element)
+  });
 }
