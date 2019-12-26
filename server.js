@@ -61,7 +61,7 @@ router.use("^/$", serverRenderer)
 // )
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  router.use(express.static("client/build"), { maxAge: '30d' });
+  router.use(express.static(path.resolve(__dirname, 'client/build'), { maxAge: '30d' }));
 }
 // router.use(express.static("client/build", { maxAge: '30d' }));
 
