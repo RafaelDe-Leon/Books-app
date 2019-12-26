@@ -52,13 +52,11 @@ module.exports = {
   },
 
   authenticate: function( req, res, next){
-    console.log(`req.session ${JSON.stringify(req.session, null, 4)}`);
+    console.log("session.user: ");
     console.log(req.session.user);
     // check only on user - no db call
-    if(req.session.user){
-      return res.status(200).json(req.session.user);
-    }else{
-        return res.status(401).json('Not authorized! Go back!');
-    }
+    return req.session.user 
+      ? res.status(200).json(req.session.user)
+      : res.status(401).json('Not authorized! Please sign in.');
   }
 };
