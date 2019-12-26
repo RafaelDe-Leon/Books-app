@@ -14,12 +14,12 @@ class SsrWrapper extends React.Component {
 
       <div>
         {this.props.ssr
-          ? <StaticRouter><div>
-            <Nav />
-            <Switch><App /></Switch></div></StaticRouter>
-          : <Router><div>
-          <Nav />
-          <Switch><App /></Switch></div></Router>
+          ? <StaticRouter>
+              <App />
+            </StaticRouter>
+          : <Router>
+              <App />
+            </Router>
         }
       </div>
 
