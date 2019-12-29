@@ -2,3 +2,12 @@ https://github.com/ronerlih/project-3-boiler-authentication
 
 // morgan docs
 https://www.npmjs.com/package/morgan
+
+//docker: https://docs.docker.com/engine/reference/builder/
+https://docs.docker.com/get-started/
+
+//heroku scaling: 
+https://devcenter.heroku.com/articles/scaling
+
+// load test: https://www.npmjs.com/package/loadtest
+//i.e. loadtest http://localhost:7357/ -t 20 -c 10
