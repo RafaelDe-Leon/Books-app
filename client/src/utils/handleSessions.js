@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import userAPI from './userAPI';
+import axios from 'axios';
 
 export const authenticateUser = () => {
     const cookie = Cookies.get('userId');
@@ -13,4 +14,9 @@ export const logOut = () => {
   Object.keys(Cookies.get()).forEach(element => {
     Cookies.remove(element)
   });
+}
+
+export const getCpu = () => {
+  return axios.get('/api/worker/cpu')
+  
 }

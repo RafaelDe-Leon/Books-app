@@ -9,6 +9,11 @@ router.route("/signup")
 router.route("/authenticate")
   .post(userController.authenticate);
   
+
+// Matches with "/api/user/cpu"
+router.route("/cpu")
+.get(userController.cpu);
+
 // Matches with "/api/user"
 router.route("/")
   .post(userController.login);

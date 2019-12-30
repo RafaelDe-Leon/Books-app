@@ -11,3 +11,8 @@ https://devcenter.heroku.com/articles/scaling
 
 // load test: https://www.npmjs.com/package/loadtest
 //i.e. loadtest http://localhost:7357/ -t 20 -c 10
+
+//https://www.cognitiveclouds.com/insights/top-node-js-production-best-practices/
+
+//https://nodejs.org/api/cluster.html
+//https://medium.com/js-imaginea/clustering-inter-process-communication-ipc-in-node-js-748f981214e9

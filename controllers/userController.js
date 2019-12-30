@@ -58,5 +58,10 @@ module.exports = {
     return req.session.user 
       ? res.status(200).json(req.session.user)
       : res.status(401).json('Not authorized! Please sign in.');
+  },
+  cpu: function (req, res, next){
+    console.log("get cpou route");
+    console.log(process.env.cpuCore);
+    res.status(200).json(process.env.cpuCore)
   }
 };

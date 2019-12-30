@@ -6,7 +6,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import {/* getCookie, */ authenticateUser } from "./utils/handleSessions";
+import Alert from "./components/Alert";
+import {/* getCookie, */ authenticateUser, getCpu } from "./utils/handleSessions";
 
 const PrivateRoute = ({ component: Component, state: state, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -35,8 +36,13 @@ class App extends React.Component {
     .then(auth => this.setState({ authenticated: auth.status == 200 ? true : false, loading: false }))
     .catch(err => console.log(err))
 
+  getCpu = () => getCpu()
+    .then(cpu => this.setState({ cpu: cpu}))
+    .catch(err => console.log(err))
+
   componentWillMount() {
     this.authenticate();
+    this.getCpu()
   }
 
   render() {
@@ -45,6 +51,9 @@ class App extends React.Component {
       <RouterComponent>
         <div>
           <Nav />
+          <Alert>
+            {this.state.cpu ? this.state.cpu.data : ""}
+          </Alert>
           <Switch>
             <Route
               exact
