@@ -18,7 +18,9 @@ app.use(morgan("dev"));
 app.use(session({ 
   name:'__id',
   secret: 'keyboard cat',
-  cookie: {httpOnly: false, maxAge: 1000 * 60 * 60 * 24} 
+  cookie: {httpOnly: false, maxAge: 1000 * 60 * 60 * 24},
+  resave: true,
+  saveUninitialized: true
 }));
 
 // Define middleware here
@@ -40,10 +42,10 @@ app.use(router);
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mern-auth");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mern-auth",{   useCreateIndex: true,
+useUnifiedTopology: true, useNewUrlParser: true});
 
 // Start the API server
 app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-  console.log(`🌎  ==> on CPU ${process.env.cpuCore}!`);
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}! on CPU ${process.env.cpuCore}`);
 });

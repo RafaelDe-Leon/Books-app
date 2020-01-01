@@ -33,16 +33,27 @@ class App extends React.Component {
 
 
   authenticate = () => authenticateUser()
-    .then(auth => this.setState({ authenticated: auth.status == 200 ? true : false, loading: false }))
+    .then(auth => {
+      console.log("auth.status");
+      console.log(auth.status);
+      this.setState({ authenticated: auth.status === 200 ? true : false, loading: false })
+    })
     .catch(err => console.log(err))
 
   getCpu = () => getCpu()
-    .then(cpu => this.setState({ cpu: cpu}))
+    .then(cpu => this.setState({ cpu: cpu }))
     .catch(err => console.log(err))
+
+  removeInfo = () => this.setState({ cpu: null })
 
   componentWillMount() {
     this.authenticate();
-    this.getCpu()
+    this.getCpu();
+    fetch('http://api.brewerydb.com/v2/beers/?key=6d66b737226cdd5d6f16d4a6dff7f012',
+    { headers:{'Content-Type':'Authorization'}})
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -51,9 +62,6 @@ class App extends React.Component {
       <RouterComponent>
         <div>
           <Nav />
-          <Alert>
-            {this.state.cpu ? this.state.cpu.data : ""}
-          </Alert>
           <Switch>
             <Route
               exact
@@ -71,7 +79,12 @@ class App extends React.Component {
             <PrivateRoute exact path="/books/:id" state={this.state} component={Detail} />
             <Route component={NoMatch} />
           </Switch>
-
+          {this.state.cpu
+            ? ""
+            : ""
+          }
+          <Alert cpu= {this.state.cpu ? this.state.cpu.data: ""} onclick={this.removeInfo}>
+              </Alert>
         </div>
       </RouterComponent>
 
