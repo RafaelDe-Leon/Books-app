@@ -49,11 +49,11 @@ class App extends React.Component {
   componentWillMount() {
     this.authenticate();
     this.getCpu();
-    fetch('http://api.brewerydb.com/v2/beers/?key=6d66b737226cdd5d6f16d4a6dff7f012',
-    { headers:{'Content-Type':'Authorization'}})
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
+    // fetch('http://api.brewerydb.com/v2/beers/?key=6d66b737226cdd5d6f16d4a6dff7f012',
+    // { headers:{'Content-Type':'Authorization'}})
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err))
   }
 
   render() {

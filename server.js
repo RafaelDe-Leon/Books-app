@@ -47,5 +47,5 @@ useUnifiedTopology: true, useNewUrlParser: true});
 
 // Start the API server
 app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}! on CPU ${process.env.cpuCore}`);
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!  ${process.env.cpuCore ? "on CPU " + process.env.cpuCore : "" }`);
 });
