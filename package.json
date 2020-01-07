@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "PUBLIC_URL": "https://mern-stack-boilerplat.herokuapp.com/",
+  "home": "https://mern-stack-boilerplat.herokuapp.com/",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node index.js cluster ",

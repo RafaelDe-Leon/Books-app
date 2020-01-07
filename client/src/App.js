@@ -53,8 +53,7 @@ class App extends React.Component {
   }
 
   render() {
-    // const RouterComponent = this.state.ssr ? StaticRouter : Router;
-    const RouterComponent = Router;
+    const RouterComponent = this.state.ssr ? StaticRouter : Router;
     return (
       <RouterComponent>
         <div>
