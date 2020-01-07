@@ -1,3 +1,4 @@
+require('dotenv').config()
 require('ignore-styles')
 
 require('@babel/register')({
@@ -10,7 +11,7 @@ require('@babel/register')({
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const clusterMap = {};
-const clusterflag = process.argv.indexOf('cluster') >= 0 ? true : false;
+const clusterflag = process.argv.indexOf('no-cluster') < 0 ? true : false;
 if (clusterflag) {
   if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);

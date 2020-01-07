@@ -6,7 +6,9 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
-var session = require('express-session')
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
+import client from './scripts/redis';
 
 // ssr
 import {serverRenderer} from './controllers/serverSideRendering';
@@ -16,6 +18,7 @@ app.use(morgan("dev"));
 
 //use sessions for tracking logins
 app.use(session({ 
+  store: new RedisStore({client}),
   name:'__id',
   secret: 'keyboard cat',
   cookie: {httpOnly: false, maxAge: 1000 * 60 * 60 * 24},
@@ -28,7 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // ssr
-router.use("^/$", serverRenderer)
+// if (process.argv.indexOf("no-ssr") < 0)
+  router.use("^/$", serverRenderer)
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

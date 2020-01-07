@@ -10,7 +10,8 @@ https://docs.docker.com/get-started/
 https://devcenter.heroku.com/articles/scaling
 
 // load test: https://www.npmjs.com/package/loadtest
-//i.e. loadtest http://localhost:7357/ -t 20 -c 10
+//i.e. loadtest http://localhost:3000/ -t 20 -c 10
+//i.e. loadtest https://mern-stack-boilerplat.herokuapp.com/ -t 20 -c 10
 
 //https://www.cognitiveclouds.com/insights/top-node-js-production-best-practices/
 

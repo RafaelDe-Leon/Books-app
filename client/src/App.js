@@ -10,7 +10,7 @@ import Alert from "./components/Alert";
 import {/* getCookie, */ authenticateUser, getCpu } from "./utils/handleSessions";
 
 const PrivateRoute = ({ component: Component, state: state, ...rest }) => (
-  <Route {...rest} render={(props) => (
+  <Route  render={(props) => (
     state.authenticated === true
       ? <Component {...props} />
       : state.loading === true
