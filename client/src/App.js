@@ -46,10 +46,10 @@ class App extends React.Component {
   removeInfo = () => this.setState({ cpu: null })
 
   componentWillMount() {
-    if(this.props.ssr){
+    // if(this.props.ssr){
       this.authenticate();
       this.getCpu();
-    }
+    // }
   }
 
   render() {
