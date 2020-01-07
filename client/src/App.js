@@ -10,18 +10,17 @@ import Alert from "./components/Alert";
 import {/* getCookie, */ authenticateUser, getCpu } from "./utils/handleSessions";
 
 const PrivateRoute = ({ component: Component, state: state, ...rest }) => (
-  <Route  render={(props) => (
+  <Route {...rest} render={(props) => (
     state.authenticated === true
       ? <Component {...props} />
       : state.loading === true
-        ? <div></div>
+        ? <div>
+        </div>
         : <Redirect to='/' />
   )} />
 )
 
 class App extends React.Component {
-  // check cookie
-  // getCookie();
   constructor(props) {
     super(props);
     this.state = {
@@ -47,13 +46,10 @@ class App extends React.Component {
   removeInfo = () => this.setState({ cpu: null })
 
   componentWillMount() {
-    this.authenticate();
-    this.getCpu();
-    // fetch('http://api.brewerydb.com/v2/beers/?key=6d66b737226cdd5d6f16d4a6dff7f012',
-    // { headers:{'Content-Type':'Authorization'}})
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err))
+    if(this.props.ssr){
+      this.authenticate();
+      this.getCpu();
+    }
   }
 
   render() {
