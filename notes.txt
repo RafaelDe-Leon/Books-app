@@ -1,3 +1,4 @@
+
 https://github.com/ronerlih/project-3-boiler-authentication
 
 // morgan docs
@@ -25,3 +26,12 @@ https://devcenter.heroku.com/articles/scaling
 //cache:
 // heroku eviction policy:
 // heroku redis:maxmemory  --policy=volatile-lru
+// heroku redis:cli --confirm
+
+//docker
+docker build -t boiler-docker .
+docker images
+docker run -p 49160:3001 -d boiler-docker
+docker ps
+curl -i localhost:49160
+//https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
