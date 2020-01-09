@@ -54,12 +54,12 @@ module.exports = {
   },
 
   authenticate: function( req, res, next){
-    console.log("session.user: ");
+    console.log("\n\n\n\nsession.user: ");
     console.log(req.session.user);
     // check only on user - no db call
     return req.session.user 
       ? res.status(200).json(req.session.user)
-      : res.status(401).json('Not authorized! Please sign in.');
+      : res.status(201).json('Not authorized! Please sign in.');
   },
   cpu: function (req, res, next){
     console.log("get cpou route");

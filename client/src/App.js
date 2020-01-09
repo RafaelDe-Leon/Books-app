@@ -37,19 +37,23 @@ class App extends React.Component {
       console.log(auth.status);
       this.setState({ authenticated: auth.status === 200 ? true : false, loading: false })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      if(process.env.NODE_ENV !== 'production')
+      console.log(err)
+    })
 
   getCpu = () => getCpu()
     .then(cpu => this.setState({ cpu: cpu }))
-    .catch(err => console.log(err))
+    .catch(err => {
+      if(process.env.NODE_ENV !== 'production')
+      console.log(err)
+    })
 
   removeInfo = () => this.setState({ cpu: null })
 
   componentWillMount() {
-    // if(this.props.ssr){
       this.authenticate();
       this.getCpu();
-    // }
   }
 
   render() {

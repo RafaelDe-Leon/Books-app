@@ -45,6 +45,17 @@ app.use(router);
 // Add API and view routes
 app.use(routes);
 
+// error handling
+app.use(function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    console.log('error sent');
+    return next(err)
+  }
+  console.log('error will send');
+  res.status(500)
+  res.render('error', { error: err })
+});
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mern-auth",{   useCreateIndex: true,
 useUnifiedTopology: true, useNewUrlParser: true});
