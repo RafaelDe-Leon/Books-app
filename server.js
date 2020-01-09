@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const APIandAppRoutes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
+const compression = require('compression')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 import client from './scripts/redis';
@@ -15,6 +16,9 @@ import errorHandler from './scripts/errorHandler';
 
 //logs
 app.use(morgan("dev"));
+
+// compress responses
+app.use(compression())
 
 //use sessions for tracking logins
 app.use(initSession(session, RedisStore, client));
