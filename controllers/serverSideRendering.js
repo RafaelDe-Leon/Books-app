@@ -7,19 +7,16 @@ import client from '../scripts/redis';
 
 module.exports = {
   serverRenderer: (req, res, next) => {
-    // console.log(App);
-
-
     // cache try
     client.get(`ssr:app`, (error, result) => {
       if (error) {
         console.log(error);
       }
-      // // If that key exist in Redis store
-      // if (result) {
-      //   console.log("serving from cache");
-      //   return res.status(200).send(result);
-      // } else {
+      // If that key exist in Redis store
+      if (result) {
+        console.log("serving from cache");
+        return res.status(200).send(result);
+      } else {
 
         // Key does not exist in Redis store
         // Fetch from DB (or axios call to external api )
@@ -42,7 +39,7 @@ module.exports = {
             )
           )
         })
-      // }
+      }
     })
   }
 }
