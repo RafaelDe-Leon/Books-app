@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import userAPI from "../utils/userAPI";
-import {  Redirect } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
+import userAPI from '../utils/userAPI';
+import { Redirect } from 'react-router-dom';
+import { Col, Row, Container } from '../components/Grid';
+import { Input, FormBtn } from '../components/Form';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   state = {
-      email: "",
-      password: ""
-    };
-    
-  componentDidMount() {
-  }
-  
+    email: '',
+    password: ''
+  };
+
+  componentDidMount() {}
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -24,14 +24,15 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
-      userAPI.loginUser({
-        email: this.state.email,
-        password: this.state.password
-      })
+      userAPI
+        .loginUser({
+          email: this.state.email,
+          password: this.state.password
+        })
         .then(res => {
-          if(res.status === 200 ){
+          if (res.status === 200) {
             this.props.authenticate();
-            return <Redirect to="/books" />
+            return <Redirect to='/books' />;
           }
         })
         .catch(err => console.log(err));
@@ -42,36 +43,38 @@ class Login extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="12">
- 
+          <Col size='12'>
             <form>
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
-                name="email"
-                placeholder="email (required)"
+                name='email'
+                placeholder='email (required)'
               />
               <Input
                 value={this.state.password}
                 onChange={this.handleInputChange}
-                name="password"
-                placeholder="(required)"
-                type="password"
+                name='password'
+                placeholder='(required)'
+                type='password'
               />
-              
+
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
               >
                 Log in
               </FormBtn>
+
+              <Link to='/signup'>
+                <FormBtn>Sign up</FormBtn>
+              </Link>
             </form>
           </Col>
-          
         </Row>
 
         {/* Redirect on authentication */}
-        {this.props.authenticated ? <Redirect to='/books'/>: <div></div>}
+        {this.props.authenticated ? <Redirect to='/books' /> : <div></div>}
       </Container>
     );
   }
